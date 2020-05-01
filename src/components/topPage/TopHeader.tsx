@@ -5,10 +5,10 @@ import Toolbar from '@material-ui/core/Toolbar'
 export const TopHeader: FC = () => {
   return (
     <>
-      <AppBar>
-          <Toolbar>
-              <h2>タイトル</h2>
-          </Toolbar>
+      <AppBar position="static">
+        <Toolbar>
+          <h2>タイトル</h2>
+        </Toolbar>
       </AppBar>
     </>
   )
