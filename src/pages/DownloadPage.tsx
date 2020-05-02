@@ -8,10 +8,16 @@ import { makeStyles, createStyles } from '@material-ui/styles'
 
 const useStyle = makeStyles(() =>
   createStyles({
+    main: {
+      textAlign: 'center',
+      marginTop: '3%',
+    },
     tileImage: {
       height: 'auto',
       width: '436px',
-      margin: '1%',
+    },
+    button: {
+      marginTop: '1%',
     },
   })
 )
@@ -47,8 +53,24 @@ export const DownloadPage: FC = () => {
       <div>
         {data.map((tile) => (
           <div>
-            <img className={classes.tileImage} src={tile.image} alt={tile.title} />
+            <img
+              className={classes.tileImage}
+              src={tile.image}
+              alt={tile.title}
+            />
           </div>
+        ))}
+      </div>
+    )
+  }
+
+  const downloadButton = () => {
+    return (
+      <div className={classes.button}>
+        {data.map((tile) => (
+          <Button variant="contained" href={tile.downloadUrl}>
+            無料ダウンロード
+          </Button>
         ))}
       </div>
     )
@@ -57,7 +79,10 @@ export const DownloadPage: FC = () => {
   return (
     <>
       <TopHeader />
-      {displayImage()}
+      <div className={classes.main}>
+        {displayImage()}
+        {downloadButton()}
+      </div>
     </>
   )
 }
