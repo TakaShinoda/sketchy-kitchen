@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import pencil from '../../assets/images/pencil.jpg'
 import { createStyles, makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
@@ -26,6 +27,11 @@ const useStyle = makeStyles(() =>
 export const TopMain: FC = () => {
   const classes = useStyle()
   const [keyword, setKeyword] = useState('')
+  const history = useHistory()
+
+  const handleSubmit = () => {
+    history.push('/search/' + keyword)
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.target.value)
@@ -33,11 +39,11 @@ export const TopMain: FC = () => {
 
   return (
     <div className={classes.background}>
-      <Paper className={classes.paper}>
+      <Paper className={classes.paper} component="form" onSubmit={handleSubmit}>
         <IconButton type="submit">
           <SearchIcon />
         </IconButton>
-        <InputBase placeholder="キーワードを入力" onChange={handleChange}/>
+        <InputBase placeholder="キーワードを入力" onChange={handleChange} />
       </Paper>
     </div>
   )
