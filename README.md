@@ -1,3 +1,3 @@
-## distribution-website-demo (仮)
+## self-catering-recipes
 
-食べ物の写真を投稿したり、ダウンロードできるサイト
+自炊の写真とレシピのサイト (仮)
