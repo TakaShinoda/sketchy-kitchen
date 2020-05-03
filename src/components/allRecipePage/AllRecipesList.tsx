@@ -28,7 +28,7 @@ const useStyle = makeStyles(() =>
   })
 )
 
-export const AllImagesList: FC = () => {
+export const AllRecipesList: FC = () => {
   const [data, setData] = useState<TileData[]>([])
   const classes = useStyle()
   const history = useHistory()
@@ -54,7 +54,7 @@ export const AllImagesList: FC = () => {
       <div className={classes.root}>
         {data.map((tile) => (
           <div className={classes.image}>
-            <Button onClick={() => history.push('/download/' + tile.title)}>
+            <Button onClick={() => history.push('/details/' + tile.title)}>
               <img
                 className={classes.tileImage}
                 src={tile.image}

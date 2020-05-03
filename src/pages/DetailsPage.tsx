@@ -22,7 +22,7 @@ const useStyle = makeStyles(() =>
   })
 )
 
-export const DownloadPage: FC = () => {
+export const DetailsPage: FC = () => {
   const { keyword } = useParams()
   const classes = useStyle()
   const [data, setData] = useState<TileData[]>([])

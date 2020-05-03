@@ -1,12 +1,12 @@
 import React, { FC } from 'react'
 import { TopHeader } from '../components/topPage/TopHeader'
-import { ResultImageList } from '../components/resultPage/ResultImageList'
+import { ResultRecipeList } from '../components/resultPage/ResultRecipeList'
 
 export const ResultPage: FC = () => {
   return (
     <>
       <TopHeader />
-      <ResultImageList />
+      <ResultRecipeList />
     </>
   )
 }

@@ -25,7 +25,7 @@ const useStyle = makeStyles(() =>
   })
 )
 
-export const ResultImageList: FC = () => {
+export const ResultRecipeList: FC = () => {
   const [data, setData] = useState<TileData[]>([])
   const { keyword } = useParams()
   const classes = useStyle()
@@ -59,7 +59,7 @@ export const ResultImageList: FC = () => {
     <div className={classes.root}>
       {data.map((tile) => (
         <div className={classes.image}>
-          <Button onClick={() => history.push('/download/' + tile.title)}>
+          <Button onClick={() => history.push('/details/' + tile.title)}>
             <img className={classes.tileImage} src={tile.image} alt={tile.title} />
           </Button>
           <h3>{tile.title}</h3>
