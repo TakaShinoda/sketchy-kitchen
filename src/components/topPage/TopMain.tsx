@@ -31,8 +31,18 @@ export const TopMain: FC = () => {
           className={classes.button}
           onClick={() => history.push('/search')}
         >
-          探す
+          キーワードで探す
         </Button>
+
+        <Button
+          size="large"
+          variant="contained"
+          color="default"
+          className={classes.button}
+        >
+          全て見る
+        </Button>
+
 
         <Button
           size="large"
