@@ -39,6 +39,7 @@ export const TopMain: FC = () => {
           variant="contained"
           color="default"
           className={classes.button}
+          onClick={() => history.push('/all')}
         >
           全て見る
         </Button>

@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { TopMain } from '../components/topPage/TopMain'
+import { AllImagesPage } from './AllImagesPage';
 import { SearchMain } from './SearchMain'
 import { DownloadPage } from '../pages/DownloadPage'
 import { ResultPage } from './ResultPage'
@@ -12,6 +13,9 @@ export const TopPage: FC = () => {
         <Switch>
           <Route exact path="/">
             <TopMain />
+          </Route>
+          <Route exact path="/all">
+            <AllImagesPage />
           </Route>
           <Route exact path="/search">
             <SearchMain />
