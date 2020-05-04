@@ -1,9 +1,10 @@
 import React, { FC } from 'react'
 import { TopMain } from '../components/topPage/TopMain'
-import { AllRecipesPage } from './AllRecipesPage';
+import { AllRecipesPage } from './AllRecipesPage'
 import { SearchMain } from './SearchMain'
 import { DetailsPage } from './DetailsPage'
 import { ResultPage } from './ResultPage'
+import { PostsPage } from './PostsPage'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 export const TopPage: FC = () => {
@@ -25,6 +26,9 @@ export const TopPage: FC = () => {
           </Route>
           <Route exact path="/details/:keyword">
             <DetailsPage />
+          </Route>
+          <Route exact path="/post">
+            <PostsPage />
           </Route>
         </Switch>
       </Router>

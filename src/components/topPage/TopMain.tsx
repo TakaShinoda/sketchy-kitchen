@@ -50,6 +50,7 @@ export const TopMain: FC = () => {
           variant="contained"
           color="default"
           className={classes.button}
+          onClick={() => history.push('/post')}
         >
           投稿する
         </Button>
