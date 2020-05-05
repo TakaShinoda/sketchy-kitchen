@@ -5,6 +5,7 @@ import { SearchMain } from './SearchMain'
 import { DetailsPage } from './DetailsPage'
 import { ResultPage } from './ResultPage'
 import { PostsPage } from './PostsPage'
+import { NotFound } from './404'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 export const TopPage: FC = () => {
@@ -29,6 +30,9 @@ export const TopPage: FC = () => {
           </Route>
           <Route exact path="/post">
             <PostsPage />
+          </Route>
+          <Route>
+            <NotFound />
           </Route>
         </Switch>
       </Router>
