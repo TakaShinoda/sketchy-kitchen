@@ -1,7 +1,6 @@
 import React, { FC, useState } from 'react'
 import { TopHeader } from '../components/topPage/TopHeader'
 import { useHistory } from 'react-router-dom'
-import pencil from '../assets/images/pencil.jpg'
 import { createStyles, makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import IconButton from '@material-ui/core/IconButton'
@@ -10,18 +9,14 @@ import InputBase from '@material-ui/core/InputBase'
 
 const useStyle = makeStyles(() =>
   createStyles({
-    background: {
-      backgroundImage: `url(${pencil})`,
-      height: '100vh',
-      backgroundSize: 'cover',
-    },
     paper: {
       position: 'relative',
+      marginTop: '50px',
       marginLeft: 'auto',
       marginRight: 'auto',
       top: '10%',
       width: '25%',
-    }
+    },
   })
 )
 
@@ -39,7 +34,7 @@ export const SearchMain: FC = () => {
   }
 
   return (
-    <div className={classes.background}>
+    <div>
       <TopHeader />
       <Paper className={classes.paper} component="form" onSubmit={handleSubmit}>
         <IconButton type="submit">
