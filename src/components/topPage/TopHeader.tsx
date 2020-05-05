@@ -14,6 +14,9 @@ const useStyle = makeStyles(() =>
     link: {
       textDecoration: 'none',
       color: '#1A2459'
+    },
+    bar: {
+      backgroundColor: '#68a9cf'
     }
   })
 )
@@ -25,7 +28,7 @@ export const TopHeader: FC = () => {
 
   return (
     <>
-      <AppBar position="static">
+      <AppBar position="static" className={classes.bar}>
         <Toolbar>
           <h2 onClick={() => history.push('/')}>タイトル</h2>
           <div className={classes.icon}>
