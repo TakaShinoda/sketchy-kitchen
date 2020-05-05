@@ -30,7 +30,7 @@ export const TopHeader: FC = () => {
           <h2 onClick={() => history.push('/')}>タイトル</h2>
           <div className={classes.icon}>
             <IconButton>
-              <a className={classes.link} href="https://github.com/TakaShinoda" target="_blank" rel="noopener noreferrer">
+              <a className={classes.link} href="https://github.com/TakaShinoda/self-catering-recipes" target="_blank" rel="noopener noreferrer">
                 <GitHubIcon />
               </a>
             </IconButton>
