@@ -40,7 +40,7 @@ export const SearchMain: FC = () => {
         <IconButton type="submit">
           <SearchIcon />
         </IconButton>
-        <InputBase placeholder="キーワードを入力" onChange={handleChange} />
+        <InputBase placeholder="キーワードを入力" onChange={handleChange} autoFocus={true} />
       </Paper>
     </div>
   )
