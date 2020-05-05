@@ -7,23 +7,10 @@ import { ResultPage } from './ResultPage'
 import { PostsPage } from './PostsPage'
 import { NotFound } from './404'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { createStyles, makeStyles } from '@material-ui/core/styles'
-import top from '../assets/images/top_image.jpg'
-
-const useStyle = makeStyles(() =>
-  createStyles({
-    background: {
-      backgroundImage: `url(${top})`,
-      height: '100vh',
-      backgroundSize: 'cover',
-    }
-  })
-)
 
 export const TopPage: FC = () => {
-  const classes = useStyle()
   return (
-    <div className={classes.background}>
+    <>
       <Router>
         <Switch>
           <Route exact path="/">
@@ -49,6 +36,6 @@ export const TopPage: FC = () => {
           </Route>
         </Switch>
       </Router>
-    </div>
+    </>
   )
 }
