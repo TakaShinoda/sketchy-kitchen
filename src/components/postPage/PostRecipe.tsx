@@ -73,18 +73,14 @@ export const PostRecipe: FC = () => {
       <h3>写真</h3>
       <form onSubmit={handleSubmit(onSubmit)}>
         <h3>料理名</h3>
-        <fieldset
-              className={classes.form}
-            >
-        <input
-          name="title"
-          ref={register({ required: true })}
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
+        <fieldset className={classes.form}>
+          <input
+            name="title"
+            ref={register({ required: true })}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
         </fieldset>
-
-  
 
         <h3>食材</h3>
         <button type="button" onClick={addFoodstuff}>
