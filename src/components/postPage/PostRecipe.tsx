@@ -16,14 +16,18 @@ export const PostRecipe: FC = () => {
   const [procedures, setProcedures] = useState([])
   const [foodstuffcounter, setFoodstuffCounter] = useState(0)
   const [procedurecounter, setProcedureCounter] = useState(0)
+  const [comment, setComment] = useState('')
+  const [keywords, setKeywords] = useState([])
+  const [keywordcounter, setKeywordCounter] = useState(0)
   const { register, handleSubmit } = useForm()
   const classes = useStyle()
 
   const onSubmit = (data: any) => {
+    console.log(data)
     setTitle('')
     setFoodstuffs([])
     setProcedures([])
-    console.log(data)
+    setComment('')
   }
 
   const addFoodstuff = () => {
@@ -54,17 +58,22 @@ export const PostRecipe: FC = () => {
     setProcedureCounter((prevProcedureCounter) => prevProcedureCounter + 1)
   }
 
-  // const removeProcedure = (index: number) => () => {
-  //   setProcedures((prevprocedures) => [
-  //     ...prevprocedures.filter((item) => item !== index),
-  //   ])
-  //   setProcedureCounter((prevProcedureCounter) => prevProcedureCounter - 1)
-  //
-  // }
-
   const clearProcedures = () => {
     setProcedures([])
     setProcedureCounter(0)
+  }
+
+  const addKeyword = () => {
+    setKeywords((prevkeywords): any => [
+      ...prevkeywords,
+      keywordcounter,
+    ])
+    setKeywordCounter((prevKeywordCounter) => prevKeywordCounter + 1)
+  }
+
+  const clearKeywords = () => {
+    setKeywords([])
+    setKeywordCounter(0)
   }
 
   return (
@@ -130,6 +139,50 @@ export const PostRecipe: FC = () => {
               <input
                 type="text"
                 name={procedureList}
+                ref={register({ required: true })}
+              />
+              {/* 
+              <button type="button" onClick={removeProcedure(index)}>
+                Remove
+              </button>
+              */}
+            </fieldset>
+          )
+        })}
+        <br />
+
+        <h3>コメント</h3>
+        <fieldset className={classes.form}>
+          <textarea
+            name="comment"
+            ref={register({ required: true })}
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
+        </fieldset>
+
+        <br />
+
+        <h3>タグ付</h3>
+        <p>本レシピのキーワードを設定してください</p>
+        <button type="button" onClick={addKeyword}>
+          Add
+        </button>
+        <button type="button" onClick={clearKeywords}>
+          Clear
+        </button>
+        {keywords.map((index) => {
+          const keywordList = `keywords[${index}]`
+          return (
+            <fieldset
+              name={keywordList}
+              key={keywordList}
+              className={classes.form}
+            >
+              <label>{index + 1}: </label>
+              <input
+                type="text"
+                name={keywordList}
                 ref={register({ required: true })}
               />
               {/* 
