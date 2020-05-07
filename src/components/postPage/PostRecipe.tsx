@@ -27,6 +27,7 @@ export const PostRecipe: FC = () => {
     setTitle('')
     setFoodstuffs([])
     setProcedures([])
+    setKeywords([])
     setComment('')
   }
 
@@ -136,8 +137,7 @@ export const PostRecipe: FC = () => {
               className={classes.form}
             >
               <label>{index + 1}: </label>
-              <input
-                type="text"
+              <textarea
                 name={procedureList}
                 ref={register({ required: true })}
               />
