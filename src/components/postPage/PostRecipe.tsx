@@ -90,6 +90,7 @@ export const PostRecipe: FC = () => {
             id="outlined-basic"
             label="料理名"
             variant="outlined"
+            type="text"
             name="title"
             inputRef={register({ required: true })}
             value={title}
@@ -112,10 +113,13 @@ export const PostRecipe: FC = () => {
               key={foodstuffName}
               className={classes.form}
             >
-              <input
+              <TextField
+                id="outlined-basic"
+                label="食材"
+                variant="outlined"
                 type="text"
                 name={foodstuffName}
-                ref={register({ required: true })}
+                inputRef={register({ required: true })}
               />
               {/* 
               <button type="button" onClick={removeFoodstuff(index)}>
