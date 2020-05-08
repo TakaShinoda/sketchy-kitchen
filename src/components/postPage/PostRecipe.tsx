@@ -2,7 +2,9 @@ import React, { FC, useState } from 'react'
 import firebase from '../../firebase'
 import { useForm } from 'react-hook-form'
 import { makeStyles, createStyles } from '@material-ui/styles'
-import TextField from '@material-ui/core/TextField';
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
+import CloudUploadIcon from '@material-ui/icons/CloudUpload'
 
 const useStyle = makeStyles(() =>
   createStyles({
@@ -67,10 +69,7 @@ export const PostRecipe: FC = () => {
   }
 
   const addKeyword = () => {
-    setKeywords((prevkeywords): any => [
-      ...prevkeywords,
-      keywordcounter,
-    ])
+    setKeywords((prevkeywords): any => [...prevkeywords, keywordcounter])
     setKeywordCounter((prevKeywordCounter) => prevKeywordCounter + 1)
   }
 
@@ -90,21 +89,20 @@ export const PostRecipe: FC = () => {
             id="outlined-basic"
             label="料理名"
             variant="outlined"
-            type="text"
             name="title"
             inputRef={register({ required: true })}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
         </fieldset>
-
         <h3>材料</h3>
-        <button type="button" onClick={addFoodstuff}>
+        <Button variant="contained" color="primary" onClick={addFoodstuff}>
           Add
-        </button>
-        <button type="button" onClick={clearFoodstuffs}>
+        </Button>
+        &nbsp;&nbsp;
+        <Button variant="contained" color="secondary" onClick={clearFoodstuffs}>
           Clear
-        </button>
+        </Button>
         {foodstuffs.map((index) => {
           const foodstuffName = `foodstuffs[${index}]`
           return (
@@ -115,9 +113,8 @@ export const PostRecipe: FC = () => {
             >
               <TextField
                 id="outlined-basic"
-                label={`材料${index+1}`}
+                label={`材料${index + 1}`}
                 variant="outlined"
-                type="text"
                 name={foodstuffName}
                 inputRef={register({ required: true })}
               />
@@ -131,12 +128,13 @@ export const PostRecipe: FC = () => {
         })}
         <br />
         <h3>手順</h3>
-        <button type="button" onClick={addProcedure}>
+        <Button variant="contained" color="primary" onClick={addProcedure}>
           Add
-        </button>
-        <button type="button" onClick={clearProcedures}>
+        </Button>
+        &nbsp;&nbsp;
+        <Button variant="contained" color="secondary" onClick={clearProcedures}>
           Clear
-        </button>
+        </Button>
         {procedures.map((index) => {
           const procedureList = `procedures[${index}]`
           return (
@@ -149,7 +147,7 @@ export const PostRecipe: FC = () => {
                 multiline
                 rows="3"
                 id="outlined-basic"
-                label={`手順${index+1}`}
+                label={`手順${index + 1}`}
                 variant="outlined"
                 name={procedureList}
                 inputRef={register({ required: true })}
@@ -163,7 +161,6 @@ export const PostRecipe: FC = () => {
           )
         })}
         <br />
-
         <h3>コメント</h3>
         <fieldset className={classes.form}>
           <TextField
@@ -178,17 +175,16 @@ export const PostRecipe: FC = () => {
             onChange={(e) => setComment(e.target.value)}
           />
         </fieldset>
-
         <br />
-
         <h3>タグ付</h3>
         <p>本レシピのキーワードを設定してください</p>
-        <button type="button" onClick={addKeyword}>
+        <Button variant="contained" color="primary" onClick={addKeyword}>
           Add
-        </button>
-        <button type="button" onClick={clearKeywords}>
+        </Button>
+        &nbsp;&nbsp;
+        <Button variant="contained" color="secondary" onClick={clearKeywords}>
           Clear
-        </button>
+        </Button>
         {keywords.map((index) => {
           const keywordList = `keywords[${index}]`
           return (
@@ -199,9 +195,8 @@ export const PostRecipe: FC = () => {
             >
               <TextField
                 id="outlined-basic"
-                label={`タグ${index+1}`}
+                label={`タグ${index + 1}`}
                 variant="outlined"
-                type="text"
                 name={keywordList}
                 inputRef={register({ required: true })}
               />
@@ -214,7 +209,15 @@ export const PostRecipe: FC = () => {
           )
         })}
         <br />
-        <input type="submit" />
+        <br />
+        <Button
+          type="submit"
+          variant="contained"
+          color="default"
+          startIcon={<CloudUploadIcon />}
+        >
+          Upload
+        </Button>
       </form>
       <br />
       <br />
