@@ -98,7 +98,7 @@ export const PostRecipe: FC = () => {
           />
         </fieldset>
 
-        <h3>食材</h3>
+        <h3>材料</h3>
         <button type="button" onClick={addFoodstuff}>
           Add
         </button>
@@ -115,7 +115,7 @@ export const PostRecipe: FC = () => {
             >
               <TextField
                 id="outlined-basic"
-                label="食材"
+                label={`材料${index+1}`}
                 variant="outlined"
                 type="text"
                 name={foodstuffName}
@@ -145,10 +145,14 @@ export const PostRecipe: FC = () => {
               key={procedureList}
               className={classes.form}
             >
-              <label>{index + 1}: </label>
-              <textarea
+              <TextField
+                multiline
+                rows="3"
+                id="outlined-basic"
+                label={`手順${index+1}`}
+                variant="outlined"
                 name={procedureList}
-                ref={register({ required: true })}
+                inputRef={register({ required: true })}
               />
               {/* 
               <button type="button" onClick={removeProcedure(index)}>
@@ -162,9 +166,14 @@ export const PostRecipe: FC = () => {
 
         <h3>コメント</h3>
         <fieldset className={classes.form}>
-          <textarea
+          <TextField
+            multiline
+            rows="4"
+            id="outlined-basic"
+            label="感想"
+            variant="outlined"
             name="comment"
-            ref={register({ required: true })}
+            inputRef={register({ required: true })}
             value={comment}
             onChange={(e) => setComment(e.target.value)}
           />
@@ -188,11 +197,13 @@ export const PostRecipe: FC = () => {
               key={keywordList}
               className={classes.form}
             >
-              <label>{index + 1}: </label>
-              <input
+              <TextField
+                id="outlined-basic"
+                label={`タグ${index+1}`}
+                variant="outlined"
                 type="text"
                 name={keywordList}
-                ref={register({ required: true })}
+                inputRef={register({ required: true })}
               />
               {/* 
               <button type="button" onClick={removeProcedure(index)}>
@@ -205,6 +216,8 @@ export const PostRecipe: FC = () => {
         <br />
         <input type="submit" />
       </form>
+      <br />
+      <br />
     </>
   )
 }
