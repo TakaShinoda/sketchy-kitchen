@@ -8,6 +8,9 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload'
 
 const useStyle = makeStyles(() =>
   createStyles({
+    main: {
+      textAlign: 'center',
+    },
     form: {
       borderStyle: 'none',
     },
@@ -79,7 +82,7 @@ export const PostRecipe: FC = () => {
   }
 
   return (
-    <>
+    <div className={classes.main}>
       <h2>投稿</h2>
       <h3>写真</h3>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -210,6 +213,7 @@ export const PostRecipe: FC = () => {
         })}
         <br />
         <br />
+        <h3>投稿</h3>
         <Button
           type="submit"
           variant="contained"
@@ -221,6 +225,6 @@ export const PostRecipe: FC = () => {
       </form>
       <br />
       <br />
-    </>
+    </div>
   )
 }
