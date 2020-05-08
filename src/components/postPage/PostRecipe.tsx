@@ -2,6 +2,8 @@ import React, { FC, useState } from 'react'
 import firebase from '../../firebase'
 import { useForm } from 'react-hook-form'
 import { makeStyles, createStyles } from '@material-ui/styles'
+import TextField from '@material-ui/core/TextField';
+
 const useStyle = makeStyles(() =>
   createStyles({
     form: {
@@ -84,9 +86,12 @@ export const PostRecipe: FC = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <h3>料理名</h3>
         <fieldset className={classes.form}>
-          <input
+          <TextField
+            id="outlined-basic"
+            label="料理名"
+            variant="outlined"
             name="title"
-            ref={register({ required: true })}
+            inputRef={register({ required: true })}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
