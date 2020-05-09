@@ -13,7 +13,7 @@ const useStyle = makeStyles(() =>
     root: {
       display: 'flex',
       flexWrap: 'wrap',
-      width: '80%',
+      width: '90%',
       textAlign: 'center',
       marginTop: '2%',
     },
