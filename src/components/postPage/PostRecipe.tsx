@@ -17,7 +17,9 @@ const useStyle = makeStyles(() =>
   })
 )
 
+
 export const PostRecipe: FC = () => {
+  const [image, setImage] = useState<any>('')
   const [title, setTitle] = useState('')
   const [foodstuffs, setFoodstuffs] = useState([])
   const [procedures, setProcedures] = useState([])
@@ -30,11 +32,32 @@ export const PostRecipe: FC = () => {
   const classes = useStyle()
 
   const onSubmit = (data: any) => {
-    console.log(data)
+      console.log(image)
+   
+
+    // url作成
+    //const blobUrl = window.URL.createObjectURL(image)
+    //console.log(blobUrl)
+    
+    // upload storage
+    const storageRef = firebase.storage().ref('images').child(`${image.name}`)
+    storageRef.put(image)
+    
+
+    // upload firestore
+    // const db = firebase.firestore()
+    // db.collection('tileData').add({
+    //   title: data.title,
+    //   foodstuffs: data.foodstuffs,
+    //   procedures: data.procedures,
+    //   comment: data.comment,
+    //   keywords: data.keywords,
+    // })
+
     setTitle('')
-    setFoodstuffs([])
-    setProcedures([])
-    setKeywords([])
+    clearFoodstuffs()
+    clearProcedures()
+    clearKeywords()
     setComment('')
   }
 
@@ -84,8 +107,14 @@ export const PostRecipe: FC = () => {
   return (
     <div className={classes.main}>
       <h2>投稿</h2>
-      <h3>写真</h3>
       <form onSubmit={handleSubmit(onSubmit)}>
+        <h3>写真</h3>
+        
+        <TextField type="file" onChange={(e: React.ChangeEvent<HTMLInputElement>|any) => setImage(e.target.files[0])} />
+
+
+
+        
         <h3>料理名</h3>
         <fieldset className={classes.form}>
           <TextField
@@ -213,7 +242,7 @@ export const PostRecipe: FC = () => {
         })}
         <br />
         <br />
-        <h3>投稿</h3>
+        <h3>アップロード</h3>
         <Button
           type="submit"
           variant="contained"
