@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import CloudUploadIcon from '@material-ui/icons/CloudUpload'
 
+
 const useStyle = makeStyles(() =>
   createStyles({
     main: {
@@ -20,6 +21,7 @@ const useStyle = makeStyles(() =>
 
 export const PostRecipe: FC = () => {
   const [image, setImage] = useState<any>('')
+  const [imageUrl, setImageUrl] = useState('')
   const [title, setTitle] = useState('')
   const [foodstuffs, setFoodstuffs] = useState([])
   const [procedures, setProcedures] = useState([])
@@ -33,15 +35,28 @@ export const PostRecipe: FC = () => {
 
   const onSubmit = (data: any) => {
       console.log(image)
-   
+      const postIndex = Date.now().toString()
 
-    // url作成
-    //const blobUrl = window.URL.createObjectURL(image)
-    //console.log(blobUrl)
+
     
     // upload storage
-    const storageRef = firebase.storage().ref('images').child(`${image.name}`)
+    const storageRef = firebase.storage().ref('images').child(`${postIndex}`)
     storageRef.put(image)
+
+
+    // storageRef.getDownloadURL().then(fireBaseUrl => {setImageUrl(fireBaseUrl)})
+    // console.log(imageUrl)
+
+
+
+
+
+
+    
+    // url作成
+    // const Url = storageRef.getDownloadURL().then(firebaseUri => {setImageUrl(firebaseUri)})
+    // console.log(Url)
+
     
 
     // upload firestore
@@ -53,7 +68,6 @@ export const PostRecipe: FC = () => {
     //   comment: data.comment,
     //   keywords: data.keywords,
     // })
-
     setTitle('')
     clearFoodstuffs()
     clearProcedures()
