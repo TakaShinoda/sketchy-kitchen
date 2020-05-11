@@ -33,7 +33,8 @@ export const PostRecipe: FC = () => {
   const { register, handleSubmit } = useForm()
   const classes = useStyle()
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
+
       console.log(image)
       const postIndex = Date.now().toString()
 
@@ -41,11 +42,25 @@ export const PostRecipe: FC = () => {
     
     // upload storage
     const storageRef = firebase.storage().ref('images').child(`${postIndex}.jpg`)
-    storageRef.put(image)
+    storageRef.put(image).then(function(snapshot: any) {
+
+        // アップロードされたバイト数とアップロードされる総バイト数を含む、タスクの進捗状況を取得します。
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+
+        console.log('Upload is ' + progress + '% done');
+
+    }).then(() => {
+        // アップロードが正常に完了
+        storageRef.getDownloadURL().then((downloadURL) => {
+            console.log('File available at', downloadURL);
+        })
+    }).catch(() => {alert('画像の保存に失敗しました。')})
 
 
     // storageRef.getDownloadURL().then(fireBaseUrl => {setImageUrl(fireBaseUrl)})
-    // console.log(imageUrl)
+    // console.log({imageUrl})
+
+    
 
 
 
