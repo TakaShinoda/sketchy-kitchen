@@ -40,7 +40,7 @@ export const PostRecipe: FC = () => {
 
     
     // upload storage
-    const storageRef = firebase.storage().ref('images').child(`${postIndex}`)
+    const storageRef = firebase.storage().ref('images').child(`${postIndex}.jpg`)
     storageRef.put(image)
 
 
