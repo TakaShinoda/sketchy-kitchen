@@ -21,7 +21,7 @@ const useStyle = makeStyles(() =>
 
 export const PostRecipe: FC = () => {
   const [image, setImage] = useState<any>('')
-  const [imageUrl, setImageUrl] = useState('')
+  const [imageUrl, setImageUrl] = useState()
   const [title, setTitle] = useState('')
   const [foodstuffs, setFoodstuffs] = useState([])
   const [procedures, setProcedures] = useState([])
@@ -38,40 +38,32 @@ export const PostRecipe: FC = () => {
       console.log(image)
       const postIndex = Date.now().toString()
 
-
+      const storageRef = firebase.storage().ref('images').child(`${postIndex}.jpg`)
+      const snapshot = await storageRef.put(image)
+      const progress = await (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log(`Upload is ${progress} % done`);
+      const downloadURL = await storageRef.getDownloadURL()
+      console.log('File available at', downloadURL)
+              
+  
+  
     
     // upload storage
-    const storageRef = firebase.storage().ref('images').child(`${postIndex}.jpg`)
-    storageRef.put(image).then(function(snapshot: any) {
-
-        // アップロードされたバイト数とアップロードされる総バイト数を含む、タスクの進捗状況を取得します。
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-
-        console.log('Upload is ' + progress + '% done');
-
-    }).then(() => {
-        // アップロードが正常に完了
-        storageRef.getDownloadURL().then((downloadURL) => {
-            console.log('File available at', downloadURL);
-        })
-    }).catch(() => {alert('画像の保存に失敗しました。')})
-
-
-    // storageRef.getDownloadURL().then(fireBaseUrl => {setImageUrl(fireBaseUrl)})
-    // console.log({imageUrl})
-
+    // const storageRef = firebase.storage().ref('images').child(`${postIndex}.jpg`)
+    // storageRef.put(image).then((snapshot: any) => {
+    //     // アップロードされたバイト数とアップロードされる総バイト数を含む、タスクの進捗状況を取得します。
+    //     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    //     console.log(`Upload is ${progress} % done`);
+    // }).then(() => {
+    //     // アップロードが正常に完了
+    //     storageRef.getDownloadURL().then((downloadURL) => {
+    //         console.log('File available at', downloadURL)
+    //         
+// 
+    //     })
+    // }).catch(() => {alert('画像の保存に失敗しました。')})
+// 
     
-
-
-
-
-
-
-    
-    // url作成
-    // const Url = storageRef.getDownloadURL().then(firebaseUri => {setImageUrl(firebaseUri)})
-    // console.log(Url)
-
     
 
     // upload firestore
