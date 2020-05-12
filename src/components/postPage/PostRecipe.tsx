@@ -32,8 +32,6 @@ export const PostRecipe: FC = () => {
   const classes = useStyle()
 
   const onSubmit = async(data: any) => {
-    // uploadImage()
-    console.log(image)
     const postIndex = Date.now().toString()
     const storageRef = firebase.storage().ref('images').child(`${postIndex}.jpg`)
     const snapshot = await storageRef.put(image)
@@ -42,22 +40,6 @@ export const PostRecipe: FC = () => {
     // get download url
     const downloadURL = await storageRef.getDownloadURL()
     console.log('File available at', downloadURL)
-
-    // upload storage
-    // const storageRef = firebase.storage().ref('images').child(`${postIndex}.jpg`)
-    // storageRef.put(image).then((snapshot: any) => {
-    //     // アップロードされたバイト数とアップロードされる総バイト数を含む、タスクの進捗状況を取得します。
-    //     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-    //     console.log(`Upload is ${progress} % done`);
-    // }).then(() => {
-    //     // アップロードが正常に完了
-    //     storageRef.getDownloadURL().then((downloadURL) => {
-    //         console.log('File available at', downloadURL)
-    //
-    //
-    //     })
-    // }).catch(() => {alert('画像の保存に失敗しました。')})
-    //
 
     // upload firestore
      const db = firebase.firestore()
@@ -69,26 +51,14 @@ export const PostRecipe: FC = () => {
        comment: data.comment,
        keywords: data.keywords,
      })
+    
+     // reset
     setTitle('')
     clearFoodstuffs()
     clearProcedures()
     clearKeywords()
     setComment('')
   }
-
-  // const uploadImage = async () => {
-  //   console.log(image)
-  //   const postIndex = Date.now().toString()
-  //   const storageRef = firebase.storage().ref('images').child(`${postIndex}.jpg`)
-  //   const snapshot = await storageRef.put(image)
-  //   const progress = await (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-  //   console.log(`Upload is ${progress} % done`)
-  //   // get download url
-  //   const downloadURL = await storageRef.getDownloadURL()
-  //   console.log('File available at', downloadURL)
-  // }
-
-
 
   const addFoodstuff = () => {
     setFoodstuffs((prevfoodstuffs): any => [
