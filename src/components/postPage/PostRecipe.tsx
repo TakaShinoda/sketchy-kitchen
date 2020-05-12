@@ -6,7 +6,6 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import CloudUploadIcon from '@material-ui/icons/CloudUpload'
 
-
 const useStyle = makeStyles(() =>
   createStyles({
     main: {
@@ -18,10 +17,9 @@ const useStyle = makeStyles(() =>
   })
 )
 
-
 export const PostRecipe: FC = () => {
   const [image, setImage] = useState<any>('')
-  const [imageUrl, setImageUrl] = useState()
+  // const [imageUrl, setImageUrl] = useState('')
   const [title, setTitle] = useState('')
   const [foodstuffs, setFoodstuffs] = useState([])
   const [procedures, setProcedures] = useState([])
@@ -33,21 +31,18 @@ export const PostRecipe: FC = () => {
   const { register, handleSubmit } = useForm()
   const classes = useStyle()
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async(data: any) => {
+    // uploadImage()
+    console.log(image)
+    const postIndex = Date.now().toString()
+    const storageRef = firebase.storage().ref('images').child(`${postIndex}.jpg`)
+    const snapshot = await storageRef.put(image)
+    const progress = await (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+    console.log(`Upload is ${progress} % done`)
+    // get download url
+    const downloadURL = await storageRef.getDownloadURL()
+    console.log('File available at', downloadURL)
 
-      console.log(image)
-      const postIndex = Date.now().toString()
-
-      const storageRef = firebase.storage().ref('images').child(`${postIndex}.jpg`)
-      const snapshot = await storageRef.put(image)
-      const progress = await (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      console.log(`Upload is ${progress} % done`);
-      const downloadURL = await storageRef.getDownloadURL()
-      console.log('File available at', downloadURL)
-              
-  
-  
-    
     // upload storage
     // const storageRef = firebase.storage().ref('images').child(`${postIndex}.jpg`)
     // storageRef.put(image).then((snapshot: any) => {
@@ -58,29 +53,42 @@ export const PostRecipe: FC = () => {
     //     // アップロードが正常に完了
     //     storageRef.getDownloadURL().then((downloadURL) => {
     //         console.log('File available at', downloadURL)
-    //         
-// 
+    //
+    //
     //     })
     // }).catch(() => {alert('画像の保存に失敗しました。')})
-// 
-    
-    
+    //
 
     // upload firestore
-    // const db = firebase.firestore()
-    // db.collection('tileData').add({
-    //   title: data.title,
-    //   foodstuffs: data.foodstuffs,
-    //   procedures: data.procedures,
-    //   comment: data.comment,
-    //   keywords: data.keywords,
-    // })
+     const db = firebase.firestore()
+     db.collection('tileData').add({
+        image: downloadURL,
+       title: data.title,
+       foodstuffs: data.foodstuffs,
+       procedures: data.procedures,
+       comment: data.comment,
+       keywords: data.keywords,
+     })
     setTitle('')
     clearFoodstuffs()
     clearProcedures()
     clearKeywords()
     setComment('')
   }
+
+  // const uploadImage = async () => {
+  //   console.log(image)
+  //   const postIndex = Date.now().toString()
+  //   const storageRef = firebase.storage().ref('images').child(`${postIndex}.jpg`)
+  //   const snapshot = await storageRef.put(image)
+  //   const progress = await (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+  //   console.log(`Upload is ${progress} % done`)
+  //   // get download url
+  //   const downloadURL = await storageRef.getDownloadURL()
+  //   console.log('File available at', downloadURL)
+  // }
+
+
 
   const addFoodstuff = () => {
     setFoodstuffs((prevfoodstuffs): any => [
@@ -130,12 +138,12 @@ export const PostRecipe: FC = () => {
       <h2>投稿</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <h3>写真</h3>
-        
-        <TextField type="file" onChange={(e: React.ChangeEvent<HTMLInputElement>|any) => setImage(e.target.files[0])} />
-
-
-
-        
+        <TextField
+          type="file"
+          onChange={(e: React.ChangeEvent<HTMLInputElement> | any) =>
+            setImage(e.target.files[0])
+          }
+        />
         <h3>料理名</h3>
         <fieldset className={classes.form}>
           <TextField
