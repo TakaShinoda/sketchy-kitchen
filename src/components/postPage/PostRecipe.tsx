@@ -1,10 +1,11 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import firebase from '../../firebase'
 import { useForm } from 'react-hook-form'
 import { makeStyles, createStyles } from '@material-ui/styles'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import CloudUploadIcon from '@material-ui/icons/CloudUpload'
+import { useHistory } from 'react-router-dom'
 
 const useStyle = makeStyles(() =>
   createStyles({
@@ -30,6 +31,7 @@ export const PostRecipe: FC = () => {
   const [keywordcounter, setKeywordCounter] = useState(0)
   const { register, handleSubmit } = useForm()
   const classes = useStyle()
+  const history = useHistory()
 
   const onSubmit = async(data: any) => {
     const postIndex = Date.now().toString()
@@ -58,6 +60,8 @@ export const PostRecipe: FC = () => {
     clearProcedures()
     clearKeywords()
     setComment('')
+    // ページ遷移する
+    history.push('/all')
   }
 
   const addFoodstuff = () => {
@@ -102,6 +106,18 @@ export const PostRecipe: FC = () => {
     setKeywords([])
     setKeywordCounter(0)
   }
+
+  useEffect(() => {
+    addFoodstuff()
+  }, [])
+
+  useEffect(() => {
+    addProcedure()
+  },[])
+
+  useEffect(() => {
+    addKeyword()
+  },[])
 
   return (
     <div className={classes.main}>
