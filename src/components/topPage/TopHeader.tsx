@@ -34,7 +34,7 @@ export const TopHeader: FC = () => {
             disableRipple={true}
             style={{ backgroundColor: 'transparent' }}
           >
-            <h2 onClick={() => history.push('/')}>#stay kitchen</h2>
+            <h2 onClick={() => history.push('/')}>sketchy kitchen</h2>
           </Button>
 
           <div className={classes.icon}>
