@@ -34,11 +34,15 @@ export const PostRecipe: FC = () => {
   const history = useHistory()
 
   const onSubmit = async(data: any) => {
+    if (image === '') { alert('画像を選択してください')}
+
     const postIndex = Date.now().toString()
     const storageRef = firebase.storage().ref('images').child(`${postIndex}.jpg`)
     const snapshot = await storageRef.put(image)
     const progress = await (snapshot.bytesTransferred / snapshot.totalBytes) * 100
     console.log(`Upload is ${progress} % done`)
+
+    
     // get download url
     const downloadURL = await storageRef.getDownloadURL()
     console.log('File available at', downloadURL)
@@ -109,15 +113,9 @@ export const PostRecipe: FC = () => {
 
   useEffect(() => {
     addFoodstuff()
-  }, [])
-
-  useEffect(() => {
     addProcedure()
-  },[])
-
-  useEffect(() => {
     addKeyword()
-  },[])
+  }, [])
 
   return (
     <div className={classes.main}>
