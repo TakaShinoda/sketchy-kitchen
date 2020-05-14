@@ -1,6 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import Button from '@material-ui/core/Button'
 import firebase from '../firebase'
 import { TopHeader } from '../components/topPage/TopHeader'
 import { TileData } from '../types/types'
@@ -14,10 +13,15 @@ const useStyle = makeStyles(() =>
     },
     tileImage: {
       height: 'auto',
-      width: '436px',
+      width: '327px',
     },
     button: {
       marginTop: '1%',
+    },
+    hr: {
+      backgroundColor: '#eee',
+      height: '1px',
+      border: 'none',
     },
   })
 )
@@ -30,11 +34,7 @@ export const DetailsPage: FC = () => {
   const getData = async (searchWord: string | undefined) => {
     const db = firebase.firestore()
     const tileDataRef = db.collection('tileData')
-    const searchedData = tileDataRef.where(
-      'keywords',
-      'array-contains',
-      searchWord
-    )
+    const searchedData = tileDataRef.where('title', '==', searchWord)
     const snapShot = await searchedData.get()
     const temporaryData: object[] = []
     snapShot.docs.map((doc) => {
@@ -46,32 +46,43 @@ export const DetailsPage: FC = () => {
 
   useEffect(() => {
     console.log(`searchWordは: ${keyword}`)
-    getData(keyword)　// tile.title
+    getData(keyword) // tile.title
   }, [])
 
-  const displayImage = () => {
+  const displayRecipe = () => {
     return (
       <div>
-        {data.map((tile) => (
-          <div>
+        {data.map((tile, index) => (
+          <div key={index}>
+            {index ? <div>こちらもおすすめ！</div> : <></>}
             <img
               className={classes.tileImage}
               src={tile.image}
               alt={tile.title}
             />
-          </div>
-        ))}
-      </div>
-    )
-  }
+            <h2>{tile.title}</h2>
 
-  const downloadButton = () => {
-    return (
-      <div className={classes.button}>
-        {data.map((tile) => (
-          <Button variant="contained" href={tile.downloadUrl}>
-            無料ダウンロード
-          </Button>
+            <h3>材料</h3>
+            <div>
+              {tile.foodstuffs.map((foodstuff, index) => (
+                <div key={index}>{foodstuff}</div>
+              ))}
+            </div>
+
+            <h3>手順</h3>
+            <div>
+              {tile.procedures.map((procedure, index) => (
+                <div key={index}>
+                  {`${index + 1}`}, {procedure}
+                </div>
+              ))}
+            </div>
+
+            <h3>コメント</h3>
+            <div>{tile.comment}</div>
+            <br />
+            <hr className={classes.hr} />
+          </div>
         ))}
       </div>
     )
@@ -80,11 +91,7 @@ export const DetailsPage: FC = () => {
   return (
     <>
       <TopHeader />
-      <div className={classes.main}>
-        <p>あ</p>
-        {displayImage()}
-        {downloadButton()}
-      </div>
+      <div className={classes.main}>{displayRecipe()}</div>
     </>
   )
 }
