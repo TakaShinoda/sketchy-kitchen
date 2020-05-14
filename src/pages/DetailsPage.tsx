@@ -23,6 +23,9 @@ const useStyle = makeStyles(() =>
       height: '1px',
       border: 'none',
     },
+    under: {
+      borderBottom: 'solid 3px #d3d3d3',
+    },
   })
 )
 
@@ -62,14 +65,18 @@ export const DetailsPage: FC = () => {
             />
             <h2>{tile.title}</h2>
 
-            <h3>材料</h3>
+            <h3>
+              <span className={classes.under}>材料</span>
+            </h3>
             <div>
               {tile.foodstuffs.map((foodstuff, index) => (
                 <div key={index}>{foodstuff}</div>
               ))}
             </div>
 
-            <h3>手順</h3>
+            <h3>
+              <span className={classes.under}>手順</span>
+            </h3>
             <div>
               {tile.procedures.map((procedure, index) => (
                 <div key={index}>
@@ -78,7 +85,9 @@ export const DetailsPage: FC = () => {
               ))}
             </div>
 
-            <h3>コメント</h3>
+            <h3>
+              <span className={classes.under}>コメント</span>
+            </h3>
             <div>{tile.comment}</div>
             <br />
             <hr className={classes.hr} />
