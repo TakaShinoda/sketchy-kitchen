@@ -36,7 +36,7 @@ export const ResultRecipeList: FC = () => {
     const db = firebase.firestore()
     const tileDataRef = db.collection('tileData')
     const searchedData = tileDataRef.where(
-      'keyword',
+      'keywords',
       'array-contains',
       searchWord
     )

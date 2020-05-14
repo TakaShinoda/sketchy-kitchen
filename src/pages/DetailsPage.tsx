@@ -31,7 +31,7 @@ export const DetailsPage: FC = () => {
     const db = firebase.firestore()
     const tileDataRef = db.collection('tileData')
     const searchedData = tileDataRef.where(
-      'keyword',
+      'keywords',
       'array-contains',
       searchWord
     )
@@ -45,7 +45,8 @@ export const DetailsPage: FC = () => {
   }
 
   useEffect(() => {
-    getData(keyword)
+    console.log(`searchWordは: ${keyword}`)
+    getData(keyword)　// tile.title
   }, [])
 
   const displayImage = () => {
@@ -80,6 +81,7 @@ export const DetailsPage: FC = () => {
     <>
       <TopHeader />
       <div className={classes.main}>
+        <p>あ</p>
         {displayImage()}
         {downloadButton()}
       </div>
