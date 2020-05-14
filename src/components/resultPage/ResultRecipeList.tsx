@@ -7,6 +7,9 @@ import firebase from '../../firebase'
 
 const useStyle = makeStyles(() =>
   createStyles({
+    main: {
+      textAlign: 'center',
+    },
     root: {
       display: 'flex',
       flexWrap: 'wrap',
@@ -56,15 +59,22 @@ export const ResultRecipeList: FC = () => {
 
   // 3,データが格納された配列を表示する
   return (
-    <div className={classes.root}>
-      {data.map((tile) => (
-        <div className={classes.image}>
-          <Button onClick={() => history.push('/details/' + tile.title)}>
-            <img className={classes.tileImage} src={tile.image} alt={tile.title} />
-          </Button>
-          <h3>{tile.title}</h3>
-        </div>
-      ))}
-    </div>
+    <>
+    <h2 className={classes.main}>検索結果</h2>
+      <div className={classes.root}>
+        {data.map((tile, index) => (
+          <div className={classes.image} key={index}>
+            <Button onClick={() => history.push('/details/' + tile.title)}>
+              <img
+                className={classes.tileImage}
+                src={tile.image}
+                alt={tile.title}
+              />
+            </Button>
+            <h3>{tile.title}</h3>
+          </div>
+        ))}
+      </div>
+    </>
   )
 }
