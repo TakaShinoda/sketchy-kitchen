@@ -20,7 +20,6 @@ const useStyle = makeStyles(() =>
 
 export const PostRecipe: FC = () => {
   const [image, setImage] = useState<any>('')
-  // const [imageUrl, setImageUrl] = useState('')
   const [title, setTitle] = useState('')
   const [foodstuffs, setFoodstuffs] = useState([])
   const [procedures, setProcedures] = useState([])
@@ -50,7 +49,7 @@ export const PostRecipe: FC = () => {
     // upload firestore
      const db = firebase.firestore()
      db.collection('tileData').add({
-        image: downloadURL,
+       image: downloadURL,
        title: data.title,
        foodstuffs: data.foodstuffs,
        procedures: data.procedures,
@@ -59,6 +58,7 @@ export const PostRecipe: FC = () => {
      })
     
      // reset
+    setImage('')
     setTitle('')
     clearFoodstuffs()
     clearProcedures()
