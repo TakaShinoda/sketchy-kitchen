@@ -1,6 +1,8 @@
 export interface TileData {
     image: string
-    keyword: string[]
     title: string
-    downloadUrl: string
+    foodstuffs: string[]
+    procedures: string[]
+    comment: string
+    keywords: string[]
 }
