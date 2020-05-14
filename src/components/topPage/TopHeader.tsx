@@ -9,6 +9,9 @@ import { useHistory } from 'react-router-dom'
 
 const useStyle = makeStyles(() =>
   createStyles({
+    title: {
+      color: "#fff"
+    },
     icon: {
       margin: '0 0 0 auto',
     },
@@ -34,7 +37,7 @@ export const TopHeader: FC = () => {
             disableRipple={true}
             style={{ backgroundColor: 'transparent' }}
           >
-            <h2 onClick={() => history.push('/')}>sketchy kitchen</h2>
+            <h2 className={classes.title} onClick={() => history.push('/')}>sketchy kitchen</h2>
           </Button>
 
           <div className={classes.icon}>
