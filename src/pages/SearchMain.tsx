@@ -17,6 +17,9 @@ const useStyle = makeStyles(() =>
       top: '10%',
       width: '25%',
     },
+    message: {
+      textAlign: 'center',
+    },
   })
 )
 
@@ -42,6 +45,8 @@ export const SearchMain: FC = () => {
         </IconButton>
         <InputBase placeholder="キーワードを入力" onChange={handleChange} autoFocus={true} />
       </Paper>
+      <p className={classes.message}>投稿時のタグ付を元に検索します</p>
+      <p className={classes.message}>おすすめキーワードは「肉」です</p>
     </div>
   )
 }
