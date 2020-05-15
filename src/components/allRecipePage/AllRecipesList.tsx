@@ -50,7 +50,7 @@ export const AllRecipesList: FC = () => {
 
   return (
     <div>
-      <h2 className={classes.main}>全ての写真</h2>
+      <h2 className={classes.main}>全ての料理</h2>
       <div className={classes.root}>
         {data.map((tile, index) => (
           <div className={classes.image} key={index}>
