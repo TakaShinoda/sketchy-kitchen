@@ -1,5 +1,34 @@
-## sketchy-kitchen
-Stay Homeで初めて自炊を始めた人のためのあまり細かくない(大雑把な)レシピサイト
+## Sketchy Kitchen
+
+
+### システムの概要
+レシピ投稿サイトです。
+キーワードで検索、レシピを全て一覧表示、レシピ投稿の3つの機能があります。
+
+### 機能
+- キーワード検索
+
+レシピをCloud Firestoreに保存する時にタグ(keyword)を1つ以上登録してもらって、それをもとに検索します。検索結果ページより画像をクリックする事でレシピの詳細ページに遷移します。
+
+- 一覧表示
+
+Cloud Firestoreから全て表示します。画像をクリックする事でレシピの詳細ページに遷移します。
+
+- 投稿
+
+画像をCloud Storageに保存して、ダウンロードURLを取得し、それと共に、料理名、材料などの情報をCloud Firestoreに保存します。
+
+
+### 利用した技術
+- React + TypeScript
+    - Material UI
+    - react-hook-form
+    - react-router
+- Firebase
+    - Cloud Firestore
+    - Cloud Storage
+    - Hosting
+
 
 ### URL
 - [https://sketchy-kitchen.com/](https://sketchy-kitchen.com/)
