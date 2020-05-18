@@ -212,7 +212,7 @@ export const PostRecipe: FC = () => {
             multiline
             rows="4"
             id="outlined-basic"
-            label="感想"
+            label="感想を教えて"
             variant="outlined"
             name="comment"
             inputRef={register({ required: true })}
