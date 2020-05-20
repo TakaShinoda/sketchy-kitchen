@@ -37,6 +37,8 @@ export const PostRecipe: FC = () => {
   const onSubmit = async(data: any) => {
     if (image === '') { alert('画像を選択してください')}
 
+    setSpinner(true)
+
     const postIndex = Date.now().toString()
     const storageRef = firebase.storage().ref('images').child(`${postIndex}.jpg`)
     const snapshot = await storageRef.put(image)
@@ -274,7 +276,6 @@ export const PostRecipe: FC = () => {
           variant="contained"
           color="default"
           startIcon={<CloudUploadIcon />}
-          onClick={() => setSpinner(true)}
         >
           Upload
         </Button>
