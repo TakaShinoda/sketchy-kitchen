@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import CloudUploadIcon from '@material-ui/icons/CloudUpload'
 import { useHistory } from 'react-router-dom'
+import Loader from 'react-loader-spinner'
 
 const useStyle = makeStyles(() =>
   createStyles({
@@ -31,6 +32,7 @@ export const PostRecipe: FC = () => {
   const { register, handleSubmit } = useForm()
   const classes = useStyle()
   const history = useHistory()
+  const [spinner, setSpinner] = useState(false)
 
   const onSubmit = async(data: any) => {
     if (image === '') { alert('画像を選択してください')}
@@ -64,6 +66,7 @@ export const PostRecipe: FC = () => {
     clearProcedures()
     clearKeywords()
     setComment('')
+    setSpinner(false)
     // ページ遷移する
     history.push('/all')
   }
@@ -205,6 +208,9 @@ export const PostRecipe: FC = () => {
             </fieldset>
           )
         })}
+      
+
+
         <br />
         <h3>コメント</h3>
         <fieldset className={classes.form}>
@@ -255,12 +261,20 @@ export const PostRecipe: FC = () => {
         })}
         <br />
         <br />
+        <Loader
+         type="Oval"
+         color="#a9a9a9"
+         height={100}
+         width={100}
+         visible={spinner}
+      />
         <h3>アップロード</h3>
         <Button
           type="submit"
           variant="contained"
           color="default"
           startIcon={<CloudUploadIcon />}
+          onClick={() => setSpinner(true)}
         >
           Upload
         </Button>
