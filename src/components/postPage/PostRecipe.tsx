@@ -6,6 +6,8 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import CloudUploadIcon from '@material-ui/icons/CloudUpload'
 import { useHistory } from 'react-router-dom'
+import Dialog from '@material-ui/core/Dialog'
+import Loader from 'react-loader-spinner'
 
 const useStyle = makeStyles(() =>
   createStyles({
@@ -31,10 +33,12 @@ export const PostRecipe: FC = () => {
   const { register, handleSubmit } = useForm()
   const classes = useStyle()
   const history = useHistory()
+  const [spinner, setSpinner] = useState(false)
 
   const onSubmit = async(data: any) => {
     if (image === '') { alert('画像を選択してください')}
 
+    setSpinner(true)
     const postIndex = Date.now().toString()
     const storageRef = firebase.storage().ref('images').child(`${postIndex}.jpg`)
     const snapshot = await storageRef.put(image)
@@ -64,6 +68,7 @@ export const PostRecipe: FC = () => {
     clearProcedures()
     clearKeywords()
     setComment('')
+    setSpinner(false)
     // ページ遷移する
     history.push('/all')
   }
@@ -116,9 +121,27 @@ export const PostRecipe: FC = () => {
     addProcedure()
     addKeyword()
   }, [])
+  
+  
+  const dialog = () => {
+    return (
+      <>
+        <Dialog open={spinner}>
+          <Loader
+           type="Oval"
+           color="#68a9cf"
+           height={100}
+           width={100}
+           visible={spinner}
+          />
+        </Dialog>
+      </>
+    )
+  }
 
   return (
     <div className={classes.main}>
+      {dialog()}
       <h2>投稿</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <h3>写真</h3>
