@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import CloudUploadIcon from '@material-ui/icons/CloudUpload'
 import { useHistory } from 'react-router-dom'
+import Dialog from '@material-ui/core/Dialog'
 import Loader from 'react-loader-spinner'
 
 const useStyle = makeStyles(() =>
@@ -38,7 +39,6 @@ export const PostRecipe: FC = () => {
     if (image === '') { alert('画像を選択してください')}
 
     setSpinner(true)
-
     const postIndex = Date.now().toString()
     const storageRef = firebase.storage().ref('images').child(`${postIndex}.jpg`)
     const snapshot = await storageRef.put(image)
@@ -121,9 +121,27 @@ export const PostRecipe: FC = () => {
     addProcedure()
     addKeyword()
   }, [])
+  
+  
+  const dialog = () => {
+    return (
+      <>
+        <Dialog open={spinner}>
+          <Loader
+           type="Oval"
+           color="#68a9cf"
+           height={100}
+           width={100}
+           visible={spinner}
+          />
+        </Dialog>
+      </>
+    )
+  }
 
   return (
     <div className={classes.main}>
+      {dialog()}
       <h2>投稿</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <h3>写真</h3>
@@ -210,9 +228,6 @@ export const PostRecipe: FC = () => {
             </fieldset>
           )
         })}
-      
-
-
         <br />
         <h3>コメント</h3>
         <fieldset className={classes.form}>
@@ -263,13 +278,6 @@ export const PostRecipe: FC = () => {
         })}
         <br />
         <br />
-        <Loader
-         type="Oval"
-         color="#a9a9a9"
-         height={100}
-         width={100}
-         visible={spinner}
-      />
         <h3>アップロード</h3>
         <Button
           type="submit"
