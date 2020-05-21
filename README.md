@@ -24,6 +24,7 @@ Cloud Firestoreから全て表示します。画像をクリックする事で�
     - Material UI
     - react-hook-form
     - react-router
+    - react-loader-spinner
 - Firebase
     - Cloud Firestore
     - Cloud Storage
