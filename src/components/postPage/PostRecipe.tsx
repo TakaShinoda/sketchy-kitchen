@@ -17,6 +17,9 @@ const useStyle = makeStyles(() =>
     form: {
       borderStyle: 'none',
     },
+    cancel: {
+      backgroundColor: '#c30019'
+    }
   })
 )
 
@@ -146,19 +149,20 @@ export const PostRecipe: FC = () => {
   return (
     <div className={classes.main}>
       {dialog()}
-      <h2>投稿</h2>
+      <h1>投稿</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h3>写真</h3>
+        <label htmlFor="photo"><h2>写真</h2></label>
         <TextField
           type="file"
+          id="photo"
           onChange={(e: React.ChangeEvent<HTMLInputElement> | any) =>
             setImage(e.target.files[0])
           }
         />
-        <h3>料理名</h3>
+        <label htmlFor="title"><h2>料理名</h2></label>
         <fieldset className={classes.form}>
           <TextField
-            id="outlined-basic"
+            id="title"
             label="料理名"
             variant="outlined"
             name="title"
@@ -167,7 +171,7 @@ export const PostRecipe: FC = () => {
             onChange={(e) => setTitle(e.target.value)}
           />
         </fieldset>
-        <h3>材料</h3>
+        <label htmlFor="foodstuff"><h2>材料</h2></label>
         <Button
           aria-label="材料を追加する"
           variant="contained"
@@ -182,6 +186,7 @@ export const PostRecipe: FC = () => {
           variant="contained"
           color="secondary"
           onClick={clearFoodstuffs}
+          className={classes.cancel}
         >
           Clear
         </Button>
@@ -194,7 +199,7 @@ export const PostRecipe: FC = () => {
               className={classes.form}
             >
               <TextField
-                id="outlined-basic"
+                id="foodstuff"
                 label={`材料${index + 1}`}
                 variant="outlined"
                 name={foodstuffName}
@@ -209,7 +214,7 @@ export const PostRecipe: FC = () => {
           )
         })}
         <br />
-        <h3>手順</h3>
+        <label htmlFor="procedure"><h2>手順</h2></label>
         <Button
           aria-label="手順を追加する"
           variant="contained"
@@ -224,6 +229,7 @@ export const PostRecipe: FC = () => {
           variant="contained"
           color="secondary"
           onClick={clearProcedures}
+          className={classes.cancel}
         >
           Clear
         </Button>
@@ -238,7 +244,7 @@ export const PostRecipe: FC = () => {
               <TextField
                 multiline
                 rows="3"
-                id="outlined-basic"
+                id="procedure"
                 label={`手順${index + 1}`}
                 variant="outlined"
                 name={procedureList}
@@ -253,12 +259,12 @@ export const PostRecipe: FC = () => {
           )
         })}
         <br />
-        <h3>コメント</h3>
+        <label htmlFor="comment"><h2>コメント</h2></label>
         <fieldset className={classes.form}>
           <TextField
             multiline
             rows="4"
-            id="outlined-basic"
+            id="comment"
             label="感想を教えて"
             variant="outlined"
             name="comment"
@@ -268,7 +274,7 @@ export const PostRecipe: FC = () => {
           />
         </fieldset>
         <br />
-        <h3>タグ付</h3>
+        <label htmlFor="keyword"><h2>タグ付</h2></label>
         <p>本レシピのキーワードを設定してください</p>
         <Button
           aria-label="このレシピのキーワードを追加する"
@@ -284,6 +290,7 @@ export const PostRecipe: FC = () => {
           variant="contained"
           color="secondary"
           onClick={clearKeywords}
+          className={classes.cancel}
         >
           Clear
         </Button>
@@ -296,7 +303,7 @@ export const PostRecipe: FC = () => {
               className={classes.form}
             >
               <TextField
-                id="outlined-basic"
+                id="keyword"
                 label={`タグ${index + 1}`}
                 variant="outlined"
                 name={keywordList}
@@ -312,7 +319,7 @@ export const PostRecipe: FC = () => {
         })}
         <br />
         <br />
-        <h3>アップロード</h3>
+        <h2>アップロード</h2>
         <Button
           aria-label="レシピをアップロードする"
           type="submit"
