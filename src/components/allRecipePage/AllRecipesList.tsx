@@ -25,6 +25,10 @@ const useStyle = makeStyles(() =>
       height: 'auto',
       width: '218px',
     },
+    title: {
+      fontWeight: 'bolder',
+      fontSize: '20px',
+    },
   })
 )
 
@@ -50,18 +54,21 @@ export const AllRecipesList: FC = () => {
 
   return (
     <div>
-      <h2 className={classes.main}>全ての料理</h2>
+      <h1 className={classes.main}>全ての料理</h1>
       <div className={classes.root}>
         {data.map((tile, index) => (
           <div className={classes.image} key={index}>
-            <Button aria-label='レシピの詳細をみる' onClick={() => history.push('/details/' + tile.title)}>
+            <Button
+              aria-label="レシピの詳細をみる"
+              onClick={() => history.push('/details/' + tile.title)}
+            >
               <img
                 className={classes.tileImage}
                 src={tile.image}
                 alt={tile.title}
               />
             </Button>
-            <h3>{tile.title}</h3>
+            <p className={classes.title}>{tile.title}</p>
           </div>
         ))}
       </div>
