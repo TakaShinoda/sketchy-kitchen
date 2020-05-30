@@ -54,7 +54,7 @@ export const AllRecipesList: FC = () => {
       <div className={classes.root}>
         {data.map((tile, index) => (
           <div className={classes.image} key={index}>
-            <Button onClick={() => history.push('/details/' + tile.title)}>
+            <Button aria-label='レシピの詳細をみる' onClick={() => history.push('/details/' + tile.title)}>
               <img
                 className={classes.tileImage}
                 src={tile.image}

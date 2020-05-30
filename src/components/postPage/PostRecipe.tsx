@@ -35,33 +35,38 @@ export const PostRecipe: FC = () => {
   const history = useHistory()
   const [spinner, setSpinner] = useState(false)
 
-  const onSubmit = async(data: any) => {
-    if (image === '') { alert('画像を選択してください')}
+  const onSubmit = async (data: any) => {
+    if (image === '') {
+      alert('画像を選択してください')
+    }
 
     setSpinner(true)
     const postIndex = Date.now().toString()
-    const storageRef = firebase.storage().ref('images').child(`${postIndex}.jpg`)
+    const storageRef = firebase
+      .storage()
+      .ref('images')
+      .child(`${postIndex}.jpg`)
     const snapshot = await storageRef.put(image)
-    const progress = await (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+    const progress =
+      (await (snapshot.bytesTransferred / snapshot.totalBytes)) * 100
     console.log(`Upload is ${progress} % done`)
 
-    
     // get download url
     const downloadURL = await storageRef.getDownloadURL()
     console.log('File available at', downloadURL)
 
     // upload firestore
-     const db = firebase.firestore()
-     db.collection('tileData').add({
-       image: downloadURL,
-       title: data.title,
-       foodstuffs: data.foodstuffs,
-       procedures: data.procedures,
-       comment: data.comment,
-       keywords: data.keywords,
-     })
-    
-     // reset
+    const db = firebase.firestore()
+    db.collection('tileData').add({
+      image: downloadURL,
+      title: data.title,
+      foodstuffs: data.foodstuffs,
+      procedures: data.procedures,
+      comment: data.comment,
+      keywords: data.keywords,
+    })
+
+    // reset
     setImage('')
     setTitle('')
     clearFoodstuffs()
@@ -121,18 +126,17 @@ export const PostRecipe: FC = () => {
     addProcedure()
     addKeyword()
   }, [])
-  
-  
+
   const dialog = () => {
     return (
       <>
         <Dialog open={spinner}>
           <Loader
-           type="Oval"
-           color="#68a9cf"
-           height={100}
-           width={100}
-           visible={spinner}
+            type="Oval"
+            color="#68a9cf"
+            height={100}
+            width={100}
+            visible={spinner}
           />
         </Dialog>
       </>
@@ -164,11 +168,21 @@ export const PostRecipe: FC = () => {
           />
         </fieldset>
         <h3>材料</h3>
-        <Button variant="contained" color="primary" onClick={addFoodstuff}>
+        <Button
+          aria-label="材料を追加する"
+          variant="contained"
+          color="primary"
+          onClick={addFoodstuff}
+        >
           Add
         </Button>
         &nbsp;&nbsp;
-        <Button variant="contained" color="secondary" onClick={clearFoodstuffs}>
+        <Button
+          aria-label="材料を全て削除する"
+          variant="contained"
+          color="secondary"
+          onClick={clearFoodstuffs}
+        >
           Clear
         </Button>
         {foodstuffs.map((index) => {
@@ -196,11 +210,21 @@ export const PostRecipe: FC = () => {
         })}
         <br />
         <h3>手順</h3>
-        <Button variant="contained" color="primary" onClick={addProcedure}>
+        <Button
+          aria-label="手順を追加する"
+          variant="contained"
+          color="primary"
+          onClick={addProcedure}
+        >
           Add
         </Button>
         &nbsp;&nbsp;
-        <Button variant="contained" color="secondary" onClick={clearProcedures}>
+        <Button
+          aria-label="手順を全て削除する"
+          variant="contained"
+          color="secondary"
+          onClick={clearProcedures}
+        >
           Clear
         </Button>
         {procedures.map((index) => {
@@ -246,11 +270,21 @@ export const PostRecipe: FC = () => {
         <br />
         <h3>タグ付</h3>
         <p>本レシピのキーワードを設定してください</p>
-        <Button variant="contained" color="primary" onClick={addKeyword}>
+        <Button
+          aria-label="このレシピのキーワードを追加する"
+          variant="contained"
+          color="primary"
+          onClick={addKeyword}
+        >
           Add
         </Button>
         &nbsp;&nbsp;
-        <Button variant="contained" color="secondary" onClick={clearKeywords}>
+        <Button
+          aria-label="このレシピのキーワードを全て削除する"
+          variant="contained"
+          color="secondary"
+          onClick={clearKeywords}
+        >
           Clear
         </Button>
         {keywords.map((index) => {
@@ -280,6 +314,7 @@ export const PostRecipe: FC = () => {
         <br />
         <h3>アップロード</h3>
         <Button
+          aria-label="レシピをアップロードする"
           type="submit"
           variant="contained"
           color="default"

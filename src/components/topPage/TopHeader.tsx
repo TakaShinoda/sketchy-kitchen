@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom'
 const useStyle = makeStyles(() =>
   createStyles({
     title: {
-      color: "#fff"
+      color: '#fff',
     },
     icon: {
       margin: '0 0 0 auto',
@@ -34,15 +34,19 @@ export const TopHeader: FC = () => {
       <AppBar position="static" className={classes.bar}>
         <Toolbar>
           <Button
+            aria-label="トップページに戻る"
             disableRipple={true}
             style={{ backgroundColor: 'transparent' }}
           >
-            <h2 className={classes.title} onClick={() => history.push('/')}>sketchy kitchen</h2>
+            <h2 className={classes.title} onClick={() => history.push('/')}>
+              sketchy kitchen
+            </h2>
           </Button>
 
           <div className={classes.icon}>
             <IconButton>
               <a
+                aria-label="GitHubに移動する"
                 className={classes.link}
                 href="https://github.com/TakaShinoda/self-catering-recipes"
                 target="_blank"

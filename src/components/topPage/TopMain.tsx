@@ -31,6 +31,7 @@ export const TopMain: FC = () => {
       <div className={classes.main}>
         <h2>トップ</h2>
         <Button
+          aria-label="キーワードで検索"
           size="large"
           variant="contained"
           color="default"
@@ -41,6 +42,7 @@ export const TopMain: FC = () => {
         </Button>
 
         <Button
+          aria-label="全てのレシピをみる"
           size="large"
           variant="contained"
           color="default"
@@ -51,6 +53,7 @@ export const TopMain: FC = () => {
         </Button>
 
         <Button
+          aria-label="レシピを投稿する"
           size="large"
           variant="contained"
           color="default"

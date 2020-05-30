@@ -43,7 +43,7 @@ export const SearchMain: FC = () => {
     <div>
       <TopHeader />
       <Paper className={classes.paper} component="form" onSubmit={handleSubmit}>
-        <IconButton type="submit">
+        <IconButton type="submit" aria-label='検索する'>
           <SearchIcon />
         </IconButton>
         <InputBase className={classes.input} placeholder="キーワードを入力" onChange={handleChange} autoFocus={true} />
