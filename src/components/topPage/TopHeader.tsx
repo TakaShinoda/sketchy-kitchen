@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom'
 const useStyle = makeStyles(() =>
   createStyles({
     title: {
-      color: '#fff',
+      color: '#3d3d3b',
     },
     icon: {
       margin: '0 0 0 auto',
