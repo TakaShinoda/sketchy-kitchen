@@ -30,7 +30,7 @@ export const TopMain: FC = () => {
       <TopHeader />
       <main>
         <div className={classes.main}>
-          <h2>トップ</h2>
+          <h1>Top Page</h1>
           <Button
             aria-label="キーワードで検索"
             size="large"
