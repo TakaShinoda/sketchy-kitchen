@@ -28,41 +28,43 @@ export const TopMain: FC = () => {
   return (
     <div className={classes.background}>
       <TopHeader />
-      <div className={classes.main}>
-        <h2>トップ</h2>
-        <Button
-          aria-label="キーワードで検索"
-          size="large"
-          variant="contained"
-          color="default"
-          className={classes.button}
-          onClick={() => history.push('/search')}
-        >
-          キーワードで探す
-        </Button>
+      <main>
+        <div className={classes.main}>
+          <h2>トップ</h2>
+          <Button
+            aria-label="キーワードで検索"
+            size="large"
+            variant="contained"
+            color="default"
+            className={classes.button}
+            onClick={() => history.push('/search')}
+          >
+            キーワードで探す
+          </Button>
 
-        <Button
-          aria-label="全てのレシピをみる"
-          size="large"
-          variant="contained"
-          color="default"
-          className={classes.button}
-          onClick={() => history.push('/all')}
-        >
-          全て見る
-        </Button>
+          <Button
+            aria-label="全てのレシピをみる"
+            size="large"
+            variant="contained"
+            color="default"
+            className={classes.button}
+            onClick={() => history.push('/all')}
+          >
+            全て見る
+          </Button>
 
-        <Button
-          aria-label="レシピを投稿する"
-          size="large"
-          variant="contained"
-          color="default"
-          className={classes.button}
-          onClick={() => history.push('/post')}
-        >
-          投稿する
-        </Button>
-      </div>
+          <Button
+            aria-label="レシピを投稿する"
+            size="large"
+            variant="contained"
+            color="default"
+            className={classes.button}
+            onClick={() => history.push('/post')}
+          >
+            投稿する
+          </Button>
+        </div>
+      </main>
     </div>
   )
 }
