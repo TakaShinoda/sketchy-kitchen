@@ -15,9 +15,6 @@ const useStyle = makeStyles(() =>
       height: 'auto',
       width: '327px',
     },
-    button: {
-      marginTop: '1%',
-    },
     hr: {
       backgroundColor: '#eee',
       height: '1px',
