@@ -25,6 +25,7 @@ Cloud Firestoreから全て表示します。画像をクリックする事で�
     - react-hook-form
     - react-router
     - react-loader-spinner
+    - react-axe
 - Firebase
     - Cloud Firestore
     - Cloud Storage
