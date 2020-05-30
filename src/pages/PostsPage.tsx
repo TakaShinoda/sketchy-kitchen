@@ -6,7 +6,9 @@ export const PostsPage: FC = () => {
   return (
     <>
       <TopHeader />
-      <PostRecipe />
+      <main>
+        <PostRecipe />
+      </main>
     </>
   )
 }
