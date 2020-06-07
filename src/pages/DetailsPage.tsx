@@ -15,6 +15,9 @@ const useStyle = makeStyles(() =>
       height: 'auto',
       width: '327px',
     },
+    area: {
+      marginTop: '50px',
+    },
     hr: {
       backgroundColor: '#eee',
       height: '1px',
@@ -86,7 +89,7 @@ export const DetailsPage: FC = () => {
               <span className={classes.under}>コメント</span>
             </h3>
             <div>{tile.comment}</div>
-            <br />
+            <div className={classes.area} />
             <hr className={classes.hr} />
           </div>
         ))}
@@ -97,7 +100,9 @@ export const DetailsPage: FC = () => {
   return (
     <>
       <TopHeader />
-      <div className={classes.main}>{displayRecipe()}</div>
+      <main>
+        <div className={classes.main}>{displayRecipe()}</div>
+      </main>
     </>
   )
 }
