@@ -14,6 +14,9 @@ const useStyle = makeStyles(() =>
     main: {
       textAlign: 'center',
     },
+    area: {
+      marginTop: '50px',
+    },
     form: {
       borderStyle: 'none',
     },
@@ -151,16 +154,21 @@ export const PostRecipe: FC = () => {
       {dialog()}
       <h1>投稿</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="photo">
-          <h2>写真</h2>
-        </label>
-        <TextField
-          type="file"
-          id="photo"
-          onChange={(e: React.ChangeEvent<HTMLInputElement> | any) =>
-            setImage(e.target.files[0])
-          }
-        />
+
+        <div className={classes.area}>
+          <label htmlFor="photo">
+            <h2>写真</h2>
+          </label>
+          <TextField
+            type="file"
+            id="photo"
+            onChange={(e: React.ChangeEvent<HTMLInputElement> | any) =>
+              setImage(e.target.files[0])
+            }
+          />
+        </div>
+
+        <div className={classes.area}>
         <label htmlFor="title">
           <h2>料理名</h2>
         </label>
@@ -175,6 +183,9 @@ export const PostRecipe: FC = () => {
             onChange={(e) => setTitle(e.target.value)}
           />
         </fieldset>
+        </div>
+        
+        <div className={classes.area}>
         <label htmlFor="foodstuff">
           <h2>材料</h2>
         </label>
@@ -219,7 +230,9 @@ export const PostRecipe: FC = () => {
             </fieldset>
           )
         })}
-        <br />
+        </div>
+
+        <div className={classes.area}>
         <label htmlFor="procedure">
           <h2>手順</h2>
         </label>
@@ -266,7 +279,9 @@ export const PostRecipe: FC = () => {
             </fieldset>
           )
         })}
-        <br />
+        </div>
+
+        <div className={classes.area}>
         <label htmlFor="comment">
           <h2>コメント</h2>
         </label>
@@ -283,7 +298,9 @@ export const PostRecipe: FC = () => {
             onChange={(e) => setComment(e.target.value)}
           />
         </fieldset>
-        <br />
+        </div>
+       
+        <div className={classes.area}>
         <label htmlFor="keyword">
           <h2>タグ付</h2>
         </label>
@@ -329,8 +346,9 @@ export const PostRecipe: FC = () => {
             </fieldset>
           )
         })}
-        <br />
-        <br />
+        </div>
+
+        <div className={classes.area}>
         <h2>アップロード</h2>
         <Button
           aria-label="レシピをアップロードする"
@@ -341,9 +359,10 @@ export const PostRecipe: FC = () => {
         >
           Upload
         </Button>
+        </div>
+
       </form>
-      <br />
-      <br />
+      <div className={classes.area} />
     </div>
   )
 }
