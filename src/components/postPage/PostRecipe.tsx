@@ -18,8 +18,8 @@ const useStyle = makeStyles(() =>
       borderStyle: 'none',
     },
     cancel: {
-      backgroundColor: '#c30019'
-    }
+      backgroundColor: '#c30019',
+    },
   })
 )
 
@@ -41,44 +41,44 @@ export const PostRecipe: FC = () => {
   const onSubmit = async (data: any) => {
     if (image === '') {
       alert('画像を選択してください')
+    } else {
+      setSpinner(true)
+      const postIndex = Date.now().toString()
+      const storageRef = firebase
+        .storage()
+        .ref('images')
+        .child(`${postIndex}.jpg`)
+      const snapshot = await storageRef.put(image)
+      const progress =
+        (await (snapshot.bytesTransferred / snapshot.totalBytes)) * 100
+      console.log(`Upload is ${progress} % done`)
+
+      // get download url
+      const downloadURL = await storageRef.getDownloadURL()
+      console.log('File available at', downloadURL)
+
+      // upload firestore
+      const db = firebase.firestore()
+      db.collection('tileData').add({
+        image: downloadURL,
+        title: data.title,
+        foodstuffs: data.foodstuffs,
+        procedures: data.procedures,
+        comment: data.comment,
+        keywords: data.keywords,
+      })
+
+      // reset
+      setImage('')
+      setTitle('')
+      clearFoodstuffs()
+      clearProcedures()
+      clearKeywords()
+      setComment('')
+      setSpinner(false)
+      // ページ遷移する
+      history.push('/all')
     }
-
-    setSpinner(true)
-    const postIndex = Date.now().toString()
-    const storageRef = firebase
-      .storage()
-      .ref('images')
-      .child(`${postIndex}.jpg`)
-    const snapshot = await storageRef.put(image)
-    const progress =
-      (await (snapshot.bytesTransferred / snapshot.totalBytes)) * 100
-    console.log(`Upload is ${progress} % done`)
-
-    // get download url
-    const downloadURL = await storageRef.getDownloadURL()
-    console.log('File available at', downloadURL)
-
-    // upload firestore
-    const db = firebase.firestore()
-    db.collection('tileData').add({
-      image: downloadURL,
-      title: data.title,
-      foodstuffs: data.foodstuffs,
-      procedures: data.procedures,
-      comment: data.comment,
-      keywords: data.keywords,
-    })
-
-    // reset
-    setImage('')
-    setTitle('')
-    clearFoodstuffs()
-    clearProcedures()
-    clearKeywords()
-    setComment('')
-    setSpinner(false)
-    // ページ遷移する
-    history.push('/all')
   }
 
   const addFoodstuff = () => {
@@ -151,7 +151,9 @@ export const PostRecipe: FC = () => {
       {dialog()}
       <h1>投稿</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="photo"><h2>写真</h2></label>
+        <label htmlFor="photo">
+          <h2>写真</h2>
+        </label>
         <TextField
           type="file"
           id="photo"
@@ -159,7 +161,9 @@ export const PostRecipe: FC = () => {
             setImage(e.target.files[0])
           }
         />
-        <label htmlFor="title"><h2>料理名</h2></label>
+        <label htmlFor="title">
+          <h2>料理名</h2>
+        </label>
         <fieldset className={classes.form}>
           <TextField
             id="title"
@@ -171,7 +175,9 @@ export const PostRecipe: FC = () => {
             onChange={(e) => setTitle(e.target.value)}
           />
         </fieldset>
-        <label htmlFor="foodstuff"><h2>材料</h2></label>
+        <label htmlFor="foodstuff">
+          <h2>材料</h2>
+        </label>
         <Button
           aria-label="材料を追加する"
           variant="contained"
@@ -214,7 +220,9 @@ export const PostRecipe: FC = () => {
           )
         })}
         <br />
-        <label htmlFor="procedure"><h2>手順</h2></label>
+        <label htmlFor="procedure">
+          <h2>手順</h2>
+        </label>
         <Button
           aria-label="手順を追加する"
           variant="contained"
@@ -259,7 +267,9 @@ export const PostRecipe: FC = () => {
           )
         })}
         <br />
-        <label htmlFor="comment"><h2>コメント</h2></label>
+        <label htmlFor="comment">
+          <h2>コメント</h2>
+        </label>
         <fieldset className={classes.form}>
           <TextField
             multiline
@@ -274,7 +284,9 @@ export const PostRecipe: FC = () => {
           />
         </fieldset>
         <br />
-        <label htmlFor="keyword"><h2>タグ付</h2></label>
+        <label htmlFor="keyword">
+          <h2>タグ付</h2>
+        </label>
         <p>本レシピのキーワードを設定してください</p>
         <Button
           aria-label="このレシピのキーワードを追加する"
